@@ -33,13 +33,21 @@ class Game:
     background_image = pygame.image.load(image_path)
     self.image = pygame.transform.scale(background_image, (width, height))
 
-  def run_game_loop(self):
+  def run_game_loop(self, level_speed):
     is_game_over = False
     did_win = False
     direction = 0
 
     player_character = PlayerCharacter('player.png', 375, 700, 50, 50)
     enemy_0 = EnemyCharacter('enemy.png', 20, 400, 50, 50)
+    enemy_0.SPEED *= level_speed
+
+    enemy_1 = EnemyCharacter('enemy.png', self.width - 40, 600, 50, 50)
+    enemy_1.SPEED *= level_speed
+
+    enemy_2 = EnemyCharacter('enemy.png', self.width - 40, 200, 50, 50)
+    enemy_2.SPEED *= level_speed
+
     treasure = GameObject('treasure.png', 375, 50, 50, 50)
     # Pygame dev 2
     # set up the game loop to render graphics
@@ -76,9 +84,18 @@ class Game:
       enemy_0.move(self.width)
       enemy_0.draw(self.game_screen)
 
+      # Pygame dev 10
+      # Adding levels with inc. difficulty
+      if level_speed > 2:
+        enemy_1.move(self.width)
+        enemy_1.draw(self.game_screen)
+      if level_speed > 4:
+        enemy_2.move(self.width)
+        enemy_2.draw(self.game_screen)
+
       # Pygame dev 9
       # Add true end game conditions - win and lose
-      if player_character.detect_collision(enemy_0):
+      if player_character.detect_collision(enemy_0) or player_character.detect_collision(enemy_1) or player_character.detect_collision(enemy_2):
         is_game_over = True
         did_win = False
         text = font.render('You SUCK! wah wah!', True, WHITE_COLOR)
@@ -100,7 +117,7 @@ class Game:
       clock.tick(self.TICK_RATE)
 
     if did_win:
-      self.run_game_loop()
+      self.run_game_loop(level_speed + 0.5)
     else:
       return
 
@@ -161,7 +178,7 @@ class PlayerCharacter(GameObject):
 
 class EnemyCharacter(GameObject):
 
-  SPEED = 10
+  SPEED = 5
 
   def __inti__(self, image_path, x, y, width, height):
     super().__init__(image_path, x, y, width, height)
@@ -169,7 +186,7 @@ class EnemyCharacter(GameObject):
   def move(self, max_width):
     if self.x_pos <= 20:
       self.SPEED = abs(self.SPEED)
-    elif self.x_pos >= max_width - 20:
+    elif self.x_pos >= max_width - 40:
       self.SPEED = -abs(self.SPEED)
     self.x_pos += self.SPEED
 
@@ -177,7 +194,7 @@ class EnemyCharacter(GameObject):
 pygame.init()
 
 new_game = Game('background.png', SCREEN_TITLE, SCREEN_WIDTH, SCREEN_HEIGHT)
-new_game.run_game_loop()
+new_game.run_game_loop(1)
 
 
 # Pygame dev 3
