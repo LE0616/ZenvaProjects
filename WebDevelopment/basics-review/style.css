@@ -1,0 +1,60 @@
+h1 {
+  color:red;
+  background-color:bisque
+}
+
+body {
+  font-size: 18x
+}
+
+
+/* Select an element by id */
+#mainPar {
+  color: green
+}
+
+/* Select by class */
+.phys {
+  color: aqua
+}
+
+.mental {
+  color: purple
+}
+
+/* Box Model */
+#box {
+  background-color: yellow;
+  width: 200px;
+  height: 100px;
+  padding: 20px;
+/* padding is ADDED to width height designations */
+  border: 2px solid black;
+/* border is also ADDED to total dimentions */
+  margin: 10px auto 10px auto;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 100px;
+
+}
+
+#box2 {
+  background-color: blueviolet;
+  margin-left: 10px;
+  padding:  0px 10px 30px 40px;
+
+}
+
+p {
+  font-size: 2em;
+  font-family: 'Courier New', Courier, monospace;
+  color: blue
+}
+
+.keypoint {
+  font-style: italic;
+  font-weight: bold;
+  text-decoration: underline
+}
+
+
