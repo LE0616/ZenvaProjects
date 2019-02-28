@@ -203,6 +203,7 @@ pygame.mixer.pre_init(44100, 16, 2, 4096)
 pygame.init()
 
 new_game = Game('background.png', 'PM_NIGHTPULSE_120BPM_06.mp3', SCREEN_TITLE, SCREEN_WIDTH, SCREEN_HEIGHT)
+# .wav file does not work...use MP3
 new_game.run_game_loop(1)
 
 
