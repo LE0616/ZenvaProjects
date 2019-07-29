@@ -1,3 +1,4 @@
+# Arrays by Example
 import numpy as np
 
 student_grades = np.array([56, 78, 98, 90, 58, 64, 67, 72, 93, 51])
